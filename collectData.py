@@ -15,13 +15,13 @@ api = tweepy.API(auth)
 # Two queries - use one by one to curate 20,000 entries [10k each for Delhi Air Pollution and Mumbai Rain]
 # query = "#Smog OR #MyRightToBreathe OR #CropBurning OR #AirPollution OR #LetMeBreathe OR #DelhiAirQuality OR #DelhiSmog OR #DelhiPollution OR #OddEven OR #OddEvenScheme OR #SaveDelhiAir OR #DelhiAir"
 query = "#MumbaiRains OR #mumbaiRainedout OR #MumbaiDrowning OR #CycloneOckhi OR #saveFisherMen OR #mumbaiFloods OR #bombayRain OR #rainingMumbai OR #mumbaiPouring"
-maxTweets = 10000  # Work this program twice for the two queries - go one by one
+maxTweets = 10  # Work this program twice for the two queries - go one by one
 tpq = 100  # Tweets per query1
 max_id = -1  # Setting a max_id to remove redundancy in case any of the queries raise an exception
 count = 0
 
 client = pymongo.MongoClient()
-db = client.delhiPollution_mumbaiRains
+db = client.abc
 coll = db.all_tweets  # Setting collection to enter documents.
 
 while count < maxTweets:  # To keep the extraction running even if exception is raised.
@@ -70,7 +70,7 @@ while count < maxTweets:  # To keep the extraction running even if exception is 
         count += len(new_tweets)
         print("Downloaded {0} tweets".format(count)) # Don't mind me, just keeping track.
         max_id = new_tweets[-1].id  # Max ID set as ID of last element in iterator.
-        
+
     except tweepy.TweepError as e:  # In case 15k+ tweets done, rate limit. Switch user to carry on.
         print("Changing User")
         authcount = (authcount + 1) % 10
