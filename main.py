@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 MONGODB_URI = 'mongodb://localhost:27017/delhi_mumbai'
 #MONGODB_URI = 'mongodb://user:pass@ds133856.mlab.com:33856/delhi_mumbai'
-mongo = PyMongo(app)
+
 
 client = MongoClient(MONGODB_URI)
 db = client['delhi_mumbai']

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Twitter Data Analysis</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <script type='text/javascript' src='https://www.gstatic.com/charts/loader.js'></script>
+
+    <script type='text/javascript'>
+            google.charts.load('current', {
+                'packages': ['geochart'],
+                'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
+            });
+            google.charts.load("current", {packages:["corechart"]});
+            google.charts.setOnLoadCallback(drawMarkersMap);
+            function drawMarkersMap() {
+                var data1 = google.visualization.arrayToDataTable([
+                    ['City', 'Tweets'],
+                    {% for loc in location_count %}
+                    ["{{ loc["city"] }}", {{ loc["tweets"] }}],
+                    {% endfor %}
+                ]);
+                var options = {
+                    region: 'IN',
+                    displayMode: 'markers',
+                    colorAxis: {colors: ['grey', 'black']}
+                };
+                var chart = new google.visualization.GeoChart(document.getElementById('chart_div'));
+                chart.draw(data1, options);
+            };
+
+
