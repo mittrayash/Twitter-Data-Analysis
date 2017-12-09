@@ -1,7 +1,5 @@
 __author__ = 'mittr'
 
-__author__ = 'mittr'
-# Queries the all_tweets collection and creates a new collection with the occurrences of the 10 most common hashtags.
 import pymongo
 
 client = pymongo.MongoClient()

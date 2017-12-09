@@ -8,27 +8,84 @@
 
     <script type='text/javascript' src='https://www.gstatic.com/charts/loader.js'></script>
 
-    <script type='text/javascript'>
+
+</head>
+    <body  style="font-family: 'Montserrat', sans-serif;">
+        <div class="container-fluid">
+            <div class="jumbotron">
+                <h1 style="text-align:center"><b>Modi vs Kejriwal - The Battle of Tweets</b></h1>
+            </div>
+
+            <div class="row">
+                <div class="col-md-7">
+                    <div id="donutchart" style="width: 900px; height: 600px;"></div>
+                </div>
+                <div class="col-md-5">
+                    <br><br><br><br><br><br><br>
+                    <h2 style="text-align:center"><b>Original Tweets vs Re-Tweets</b></h2>
+                    <p style="text-align:center; font-size:20px"><br><br>
+                        Tweets were categorised into Original Tweets and Re Tweets, that is tweets that were made by someone and shared by someone
+                        else.
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h2 style="text-align:center"><b>Distribution of Tweets (Text vs Image)</b></h2>
+                    <div id="barchart_values" style="width: 900px; height: 500px;"></div>
+                </div>
+            </div>
+        </div>
+    </body>
+  <script type='text/javascript'>
             google.charts.load('current', {
                 'packages': ['geochart'],
                 'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
             });
             google.charts.load("current", {packages:["corechart"]});
-            google.charts.setOnLoadCallback(drawMarkersMap);
-            function drawMarkersMap() {
-                var data1 = google.visualization.arrayToDataTable([
-                    ['City', 'Tweets'],
-                    {% for loc in location_count %}
-                    ["{{ loc["city"] }}", {{ loc["tweets"] }}],
-                    {% endfor %}
+
+
+            google.charts.setOnLoadCallback(drawDonutChart);
+            function drawDonutChart() {
+                console.log({{ orig_retweets}})
+            var data2 = google.visualization.arrayToDataTable([
+                ['Category', 'Hits'],
+                ['Original Tweets', {{ orig_retweets[0] }}],
+                ['Re-Tweets', {{ orig_retweets[1] }}]
+            ]);
+                console.log("asdasd");
+                console.log(data2);
+            var options = {
+                pieHole: 0.2,
+                slices: {
+                    0: {color: 'black'},
+                    1: {color: 'grey'}
+                }
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+                chart.draw(data2, options);
+            }
+
+
+            google.charts.setOnLoadCallback(drawBarChart);
+            function drawBarChart() {
+                var data3 = google.visualization.arrayToDataTable([
+                    ["Type of Tweet", "Hits", { role: "style" } ],
+                    ["Text", {{ media_count[0] }}, "black"],
+                    ["Images", {{ media_count[1] }}, "black"],
+                    ["Text + Images", {{ media_count[2] }}, "black"]
                 ]);
                 var options = {
-                    region: 'IN',
-                    displayMode: 'markers',
-                    colorAxis: {colors: ['grey', 'black']}
+                    width: 600,
+                    height: 450,
+                    bar: {groupWidth: "95%"},
+                    legend: { position: "none" },
                 };
-                var chart = new google.visualization.GeoChart(document.getElementById('chart_div'));
-                chart.draw(data1, options);
-            };
+                var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
+                chart.draw(data3, options);
+            }
 
 
+        </script>
+
+</html>
