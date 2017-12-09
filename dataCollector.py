@@ -13,7 +13,7 @@ auth.set_access_token(acctok[authcount], acctoksecret[authcount])
 api = tweepy.API(auth)
 
 # Two queries - use one by one to curate 20,000 entries [10k each for Delhi Air Pollution and Mumbai Rain]
-# query = "#Smog OR #MyRightToBreathe OR #CropBurning OR #AirPollution OR #LetMeBreathe OR #DelhiAirQuality OR #DelhiSmog OR #DelhiPollution OR #OddEven OR #OddEvenScheme OR #SaveDelhiAir OR #DelhiAir"
+#query = "#Smog OR #MyRightToBreathe OR #CropBurning OR #AirPollution OR #LetMeBreathe OR #DelhiAirQuality OR #DelhiSmog OR #DelhiPollution OR #OddEven OR #OddEvenScheme OR #SaveDelhiAir OR #DelhiAir"
 query = "#MumbaiRains OR #mumbaiRainedout OR #MumbaiDrowning OR #CycloneOckhi OR #saveFisherMen OR #mumbaiFloods OR #bombayRain OR #rainingMumbai OR #mumbaiPouring"
 maxTweets = 10000  # Work this program twice for the two queries - go one by one
 tpq = 100  # Tweets per query1
