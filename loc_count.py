@@ -10,7 +10,7 @@ coll = db.all_tweets
 new_db = db.loc_count
 
 
-def get_location(search_text): # Finds the city.
+def get_location(search_text):  # Finds the city.
     try:
         url = 'https://maps.googleapis.com/maps/api/place/textsearch/json'
         key = '?key=' + KEY
