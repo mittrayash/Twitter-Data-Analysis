@@ -6,8 +6,6 @@ from flask import Flask, render_template
 import pymongo
 
 
-app = Flask(__name__)
-
 #MONGODB_URI = 'mongodb://localhost:27017/delhi_mumbai'
 MONGODB_URI = 'mongodb://user:pass@ds133856.mlab.com:33856/delhi_mumbai'
 # DB_URI Changed to remote one after uploading the files there
@@ -21,7 +19,8 @@ type_count = db['type_count']
 loc = db.loc_count
 outliers = db.outliers
 
-@app.route('/',  methods=['GET'])
+app = Flask(__name__)
+@app.route('/')
 def main():
     nodes = []
     reply_edges = []
