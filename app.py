@@ -20,7 +20,6 @@ tweet_type_count = db['tweet_type_count']
 type_count = db['type_count']
 loc = db.loc_count
 outliers = db.outliers
-# Calling all collections
 
 app = Flask(__name__)
 @app.route('/')
