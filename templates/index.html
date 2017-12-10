@@ -7,7 +7,9 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
         <script type='text/javascript' src='https://www.gstatic.com/charts/loader.js'></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
         <script type='text/javascript'>
+
             google.charts.load('current', {
                 'packages': ['geochart'],
                 'mapsApiKey': 'AIzaSyDmhqzsOEIbcWwnNLwbGIyWyn6iw6mRgg4'
@@ -16,7 +18,7 @@
 
             google.charts.setOnLoadCallback(drawColumnChart2);
             function drawColumnChart2() {
-                console.log({{ orig_retweets }});
+
                 var data8 = google.visualization.arrayToDataTable([
                     ["Outlier Type", "Value", { role: "style" } ],
                     {% for x in outliers_count %}
@@ -109,18 +111,56 @@
                 chart.draw(data4, options);
             }
         </script>
+    <style rel="stylesheet">
+
+path.country {
+    fill: gray;
+    stroke-width: 1;
+    stroke: black;
+    opacity: .5;
+}
+path.sample {
+    stroke: black;
+    stroke-width: 1px;
+    fill: red;
+    fill-opacity: .5;
+}
+line.link {
+      stroke-width: 1px;
+      stroke: black;
+      stroke-opacity: .5;
+}
+circle.node {
+  fill: red;
+  stroke: white;
+  stroke-width: 1px;
+}
+circle.xy {
+  fill: pink;
+  stroke: black;
+  stroke-width: 1px;
+}
+    </style>
+
+
     </head>
     <body  style="font-family: 'Montserrat', sans-serif;">
         <div class="container-fluid">
             <div class="jumbotron" style="background-color: darkslategray; color: #fff;">
+
                 <h1 style="text-align:center"><b>Twitter Data Analysis</b></h1>
             </div>
+
+            <canvas height="500" width="500"></canvas>
+            <div id="viz">
+              <svg  height="500" width="500"></svg>
+            </div>
             <div class="row" style="margin-top:40px">
-                <div class='col-xs-12 col-sm-6' id="columnchart_values2" ></div>
-                <div class="col-xs-12 col-sm-6">
-                <h1 style="padding-top: 50px; text-align:center"><b>Outliers</b></h1>
-                <p style="text-align:center; font-size:20px">This graph evaluates the activity of non-Delhi people who are talking about Pollution and non-Mumbai People who are talking about rains.</p>
-                </div>
+            <div class='col-xs-12 col-sm-6' id="columnchart_values2" ></div>
+            <div class="col-xs-12 col-sm-6">
+            <h1 style="padding-top: 50px; text-align:center"><b>Outliers</b></h1>
+            <p style="text-align:center; font-size:20px">This graph evaluates the activity of non-Delhi people who are talking about Pollution and non-Mumbai People who are talking about rains.</p>
+            </div>
             </div>
             <div class="row">
                 <div class="col-md-7">
@@ -163,7 +203,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-7">
+                <div class="col-sm-12 col-md-7">
                     <div id="donutchart" style="width: 900px; height: 600px;"></div>
                 </div>
                 <div class="col-md-5">
@@ -185,8 +225,80 @@
                 </div>
             </div>
         </div>
-    </body>
+
+    <script>
+  var linkScale = d3.scale.linear().domain([0,.9,.95,1]).range([0,10,100,1000]);
+
+  sampleNodes = d3.range(3000).map(function(d) {
+    var datapoint = {};
+    datapoint.id = "Sample Node " + d;
+    //console.log(datapoint);
+    return datapoint;
+  })
+  k={};
+  {% for x in nodes %}
+      [console.log(x)],
+  {% endfor %}
+
+  console.log(k);
+
+
+
+  sampleLinks = [];
+    var y = 0;
+    while (y < 1000) {
+      var randomSource = Math.floor(Math.random() * 1000);
+      var randomTarget = Math.floor(linkScale(Math.random()));
+      var linkObject = {source: sampleNodes[randomSource], target: sampleNodes[randomTarget]}
+      if (randomSource != randomTarget) {
+       sampleLinks.push(linkObject);
+      }
+      y++;
+  }
+
+      force = d3.layout.force()
+      .size([500,500])
+      .gravity(.5)
+      .nodes(sampleNodes)
+      .links(sampleLinks)
+      .on("tick", forceTick);
+
+      d3.select("svg").selectAll("circle.node")
+      .data(sampleNodes)
+      .enter()
+      .append("circle")
+      .attr("r", 3)
+      .style("fill", "red")
+      .attr("class", "node")
+      .style("stroke", "white")
+      .style("stroke-width", "1px");
+
+      force.start();
+
+      function forceTick() {
+      	var context = d3.select("canvas").node().getContext("2d");
+        context.clearRect(0,0,500,500);
+
+        context.lineWidth = 1;
+        context.strokeStyle = "rgba(0, 0, 0, 0.5)";
+
+      sampleLinks.forEach(function (link) {
+        context.beginPath();
+        context.moveTo(link.source.x,link.source.y)
+        context.lineTo(link.target.x,link.target.y)
+        context.stroke();
+      })
+
+        d3.selectAll("circle.node")
+        .attr("cx", function(d) {return d.x})
+        .attr("cy", function(d) {return d.y});
+      }
+
+
+</script>
+
 <footer style="color: #fff; background-color: darkslategray;"><center>
     Made by <a href="https://mittrayash.github.io/"><b>&nbsp;Yash Mittra</b></a>
 </center></footer>
+    </body>
 </html>

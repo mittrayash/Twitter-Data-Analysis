@@ -11,20 +11,25 @@ new_db = db.loc_count
 
 
 def get_location(search_text):  # Finds the city.
-    try:
-        url = 'https://maps.googleapis.com/maps/api/place/textsearch/json'
-        key = '?key=' + KEY
-        query = '&query=' + urllib.parse.quote(search_text)
-        url = url + key + query
-        response = json.loads(requests.get(url).text)
-        addr = response["results"][0]["formatted_address"]
-        city = addr.split(", ")[0]
-        country = addr.split(", ")[2]
-        if country != "India":
-            raise IndexError
-    except IndexError:
-        city = "India"
-    return city  # If city cannot be found / city not given (most common case), city set to India
+    if "Delhi" in search_text:
+        city = "New Delhi"
+    elif "Mumbai" in search_text:
+        city = "Mumbai"
+    else:
+        try:
+            url = 'https://maps.googleapis.com/maps/api/place/textsearch/json'
+            key = '?key=' + KEY
+            query = '&query=' + urllib.parse.quote(search_text)
+            url = url + key + query
+            response = json.loads(requests.get(url).text)
+            addr = response["results"][0]["formatted_address"]
+            city = addr.split(", ")[0]
+            country = addr.split(", ")[2]
+            if country != "India":
+                raise IndexError
+        except IndexError:  # Else city set to India
+            city = "India"
+    return city
 
 i = 0
 location_count = {}
@@ -35,7 +40,6 @@ for tweet in coll.find():
         location_count[loc] = 1
     else:
         location_count[loc] += 1
-    #if i%10 == 0:
     print(str(i) + " of 20000 done")  # to keep track of progress.
 
 for x in location_count:

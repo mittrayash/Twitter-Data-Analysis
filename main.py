@@ -37,7 +37,7 @@ def main():
 
     for x in outliers.find():
         outliers_count.append({"tag": x['tag'], "value": x["val"]})
-        print(outliers_count)
+
 
     for x in loc.find():
         location_count.append({"city":x["city"], "tweets":x["tweets"]})
@@ -57,7 +57,7 @@ def main():
         i += 1
 
     for x in all_tweets.find():  # get reply, mentions, and retweet edges
-        nodes.append({"user_id": x["user_id"], "hashtags": x["hashtags"]})
+        nodes.append((x["user_id"]))
 
         if x['inReplyTo'] is not None:
             reply_edges.append({"user_id": x["user_id"], "inReplyTo": x["inReplyTo"]})
