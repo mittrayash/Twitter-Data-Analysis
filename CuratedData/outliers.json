@@ -1,0 +1,14 @@
+{
+	"_id": {
+		"$oid": "5a2c46644639b610f0057eb4"
+	},
+	"tag": "non Delhi people who are discussing the issue of pollution",
+	"val": 414
+}
+{
+	"_id": {
+		"$oid": "5a2c46654639b610f0057eb5"
+	},
+	"tag": "non Mumbai people are discussing the issue of rains",
+	"val": 91
+}

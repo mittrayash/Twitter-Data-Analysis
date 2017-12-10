@@ -1,0 +1,126 @@
+{
+	"_id": {
+		"$oid": "5a2cd5e94639b657b8dd9ad3"
+	},
+	"city": "New Delhi",
+	"tweets": "1940"
+}
+{
+	"_id": {
+		"$oid": "5a2cd5ea4639b657b8dd9ad4"
+	},
+	"city": "Jaipur",
+	"tweets": "1"
+}
+{
+	"_id": {
+		"$oid": "5a2cd5ea4639b657b8dd9ad5"
+	},
+	"city": "Mumbai",
+	"tweets": "858"
+}
+{
+	"_id": {
+		"$oid": "5a2cd5ea4639b657b8dd9ad6"
+	},
+	"city": "India",
+	"tweets": "17294"
+}
+{
+	"_id": {
+		"$oid": "5a2cd5ea4639b657b8dd9ad7"
+	},
+	"city": "Rajkot",
+	"tweets": "1"
+}
+{
+	"_id": {
+		"$oid": "5a2cd5ea4639b657b8dd9ad8"
+	},
+	"city": "Chennai",
+	"tweets": "4"
+}
+{
+	"_id": {
+		"$oid": "5a2cd5ea4639b657b8dd9ad9"
+	},
+	"city": "Ujjain",
+	"tweets": "1"
+}
+{
+	"_id": {
+		"$oid": "5a2cd5ea4639b657b8dd9ada"
+	},
+	"city": "Bengaluru",
+	"tweets": "1"
+}
+{
+	"_id": {
+		"$oid": "5a2cd5ea4639b657b8dd9adb"
+	},
+	"city": "Gorakhpur",
+	"tweets": "1"
+}
+{
+	"_id": {
+		"$oid": "5a2cd5ea4639b657b8dd9adc"
+	},
+	"city": "Noida",
+	"tweets": "1"
+}
+{
+	"_id": {
+		"$oid": "5a2cd5ea4639b657b8dd9add"
+	},
+	"city": "Khedar",
+	"tweets": "1"
+}
+{
+	"_id": {
+		"$oid": "5a2cd5ea4639b657b8dd9ade"
+	},
+	"city": "Ahmedabad",
+	"tweets": "2"
+}
+{
+	"_id": {
+		"$oid": "5a2cd5ea4639b657b8dd9adf"
+	},
+	"city": "Hyderabad",
+	"tweets": "1"
+}
+{
+	"_id": {
+		"$oid": "5a2cd5ea4639b657b8dd9ae0"
+	},
+	"city": "Bharatpur",
+	"tweets": "1"
+}
+{
+	"_id": {
+		"$oid": "5a2cd5ea4639b657b8dd9ae1"
+	},
+	"city": "Bilara",
+	"tweets": "1"
+}
+{
+	"_id": {
+		"$oid": "5a2cd5ea4639b657b8dd9ae2"
+	},
+	"city": "Allahabad",
+	"tweets": "1"
+}
+{
+	"_id": {
+		"$oid": "5a2cd5ea4639b657b8dd9ae3"
+	},
+	"city": "Puttur",
+	"tweets": "1"
+}
+{
+	"_id": {
+		"$oid": "5a2cd5ea4639b657b8dd9ae4"
+	},
+	"city": "Coimbatore",
+	"tweets": "1"
+}

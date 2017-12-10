@@ -1,0 +1,14 @@
+{
+	"_id": {
+		"$oid": "5a2c0cf04639b64e7415f5f3"
+	},
+	"category": "Original Tweets",
+	"Distribution": 15061
+}
+{
+	"_id": {
+		"$oid": "5a2c0cf04639b64e7415f5f4"
+	},
+	"category": "Retweets",
+	"Distribution": 5050
+}

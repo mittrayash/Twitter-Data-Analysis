@@ -1,0 +1,21 @@
+{
+	"_id": {
+		"$oid": "5a2c0cec4639b64b8420ff69"
+	},
+	"category": "text",
+	"hits": "16114"
+}
+{
+	"_id": {
+		"$oid": "5a2c0ced4639b64b8420ff6a"
+	},
+	"category": "image",
+	"hits": "0"
+}
+{
+	"_id": {
+		"$oid": "5a2c0ced4639b64b8420ff6b"
+	},
+	"category": "both",
+	"hits": "3997"
+}
