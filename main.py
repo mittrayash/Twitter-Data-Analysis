@@ -8,8 +8,9 @@ import pymongo
 
 app = Flask(__name__)
 
-MONGODB_URI = 'mongodb://localhost:27017/delhi_mumbai'
-
+#MONGODB_URI = 'mongodb://localhost:27017/delhi_mumbai'
+MONGODB_URI = 'mongodb://user:pass@ds133856.mlab.com:33856/delhi_mumbai'
+# DB_URI Changed to remote one after uploading the files there
 client = MongoClient(MONGODB_URI)
 db = client['delhi_mumbai']
 all_tweets = db['all_tweets']

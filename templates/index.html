@@ -75,10 +75,10 @@
             google.charts.setOnLoadCallback(drawBarChart);
             function drawBarChart() {
                 var data3 = google.visualization.arrayToDataTable([
-                    ["Type of Tweet", "Hits", { role: "style" } ],
-                    ["Text", {{ media_count[0] }}, "black"],
-                    ["Images", {{ media_count[1] }}, "black"],
-                    ["Text + Images", {{ media_count[2] }}, "black"]
+                    ["Type of Tweet", "Frequency", { role: "style" } ],
+                    ["Images", {{ media_count[0] }}, "black"],
+                    ["Text & Image", {{ media_count[1] }}, "black"],
+                    ["Text", {{ media_count[2] }}, "black"]
                 ]);
 
                 var options = {
@@ -297,8 +297,8 @@ circle.xy {
 
 </script>
 
-<footer style="color: #fff; background-color: darkslategray;"><center>
-    Made by <a href="https://mittrayash.github.io/"><b>&nbsp;Yash Mittra</b></a>
+<footer style="height: 40px; color: #fff; background-color: darkslategray;"><center>
+    <p style="padding-top: 10px;">Made by <a href="https://mittrayash.github.io/"><b>&nbsp;Yash Mittra</b></a></p>
 </center></footer>
     </body>
 </html>

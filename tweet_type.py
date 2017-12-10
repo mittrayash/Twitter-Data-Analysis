@@ -16,6 +16,6 @@ for tweet in coll.find():
         tweet_type['retweets'] += 1
 
 json = {"category": "Original Tweets", "Distribution": tweet_type['original']}
-new_db.insert(json);
+new_db.insert(json)
 json = {"category": "Retweets", "Distribution": tweet_type['retweets']}
-new_db.insert(json);
+new_db.insert(json)
