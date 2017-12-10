@@ -21,7 +21,6 @@ type_count = db['type_count']
 loc = db.loc_count
 outliers = db.outliers
 
-app = Flask(__name__)
 @app.route('/')
 def main():
     nodes = []
