@@ -21,7 +21,7 @@ type_count = db['type_count']
 loc = db.loc_count
 outliers = db.outliers
 
-@app.route('/')
+@app.route('/',  methods=['GET'])
 def main():
     nodes = []
     reply_edges = []
