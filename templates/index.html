@@ -6,8 +6,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+        <link href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script type='text/javascript' src='https://www.gstatic.com/charts/loader.js'></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+        <script type='text/javascript' src='//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js'></script>
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+
+
         <script type='text/javascript'>
 
             google.charts.load('current', {
@@ -22,7 +27,7 @@
                 var data8 = google.visualization.arrayToDataTable([
                     ["Outlier Type", "Value", { role: "style" } ],
                     {% for x in outliers_count %}
-                    ["{{ x["tag"] }}", {{ x["value"] }}, "black"],
+                    ["{{ x["tag"] }}", {{ x["value"] }}, "brown"],
                     {% endfor %}
                 ]);
 
@@ -64,8 +69,8 @@
             var options = {
                 pieHole: 0.2,
                 slices: {
-                    0: {color: 'black'},
-                    1: {color: 'grey'}
+                    0: {color: 'green'},
+                    1: {color: 'brown'}
                 }
             };
 
@@ -76,9 +81,9 @@
             function drawBarChart() {
                 var data3 = google.visualization.arrayToDataTable([
                     ["Type of Tweet", "Frequency", { role: "style" } ],
-                    ["Images", {{ media_count[0] }}, "black"],
-                    ["Text & Image", {{ media_count[1] }}, "black"],
-                    ["Text", {{ media_count[2] }}, "black"]
+                    ["Images", {{ media_count[0] }}, "brown"],
+                    ["Text & Image", {{ media_count[1] }}, "brown"],
+                    ["Text", {{ media_count[2] }}, "brown"]
                 ]);
 
                 var options = {
@@ -96,7 +101,7 @@
                 var data4 = google.visualization.arrayToDataTable([
                     ["Favorite Count", "Tweets", { role: "style" } ],
                     {% for fv in favorite_count %}
-                    [">{{ fv["favs"] }}", {{ fv["count"] }}, "black"],
+                    [">{{ fv["favs"] }}", {{ fv["count"] }}, "brown"],
                     {% endfor %}
                 ]);
 
@@ -111,38 +116,16 @@
                 chart.draw(data4, options);
             }
         </script>
-    <style rel="stylesheet">
 
-path.country {
-    fill: gray;
-    stroke-width: 1;
-    stroke: black;
-    opacity: .5;
-}
-path.sample {
-    stroke: black;
-    stroke-width: 1px;
-    fill: red;
-    fill-opacity: .5;
-}
-line.link {
-      stroke-width: 1px;
-      stroke: black;
-      stroke-opacity: .5;
-}
-circle.node {
-  fill: red;
-  stroke: white;
-  stroke-width: 1px;
-}
-circle.xy {
-  fill: pink;
-  stroke: black;
-  stroke-width: 1px;
-}
-    </style>
-
-
+<style rel="stylesheet">
+     p {
+         padding-top: 30px;
+         padding-left: 10%;
+         padding-right: 10%;
+         text-align: center;
+         font-size: 20px;
+     }
+</style>
     </head>
     <body  style="font-family: 'Montserrat', sans-serif;">
         <div class="container-fluid">
@@ -151,50 +134,63 @@ circle.xy {
                 <h1 style="text-align:center"><b>Twitter Data Analysis</b></h1>
             </div>
 
-            <canvas height="500" width="500"></canvas>
-            <div id="viz">
-              <svg  height="500" width="500"></svg>
-            </div>
+            <!--<canvas id="network" width="500" height="500"></canvas> Unable to load data. till then, no point-->
+
+
+
             <div class="row" style="margin-top:40px">
-            <div class='col-xs-12 col-sm-6' id="columnchart_values2" ></div>
-            <div class="col-xs-12 col-sm-6">
+
+            <div class="col-xs-12 col-sm-12">
+
             <h1 style="padding-top: 50px; text-align:center"><b>Outliers</b></h1>
+            <div class='col-sm-12' style=" padding-left: 10%; padding-right: 10%; ">
             <p style="text-align:center; font-size:20px">This graph evaluates the activity of non-Delhi people who are talking about Pollution and non-Mumbai People who are talking about rains.</p>
             </div>
             </div>
+            <center><div class='col-xs-12 col-sm-12' id="columnchart_values2" ></div></center>
+            </div>
             <div class="row">
-                <div class="col-md-7">
-                    <div id="chart_div" style="width:800px; height:500px; border: 2px solid black"></div>
-                </div>
-                <div class="col-md-5">
+
+                <div class="col-md-12">
                     <br>
                     <br>
                     <h1 style="text-align:center"><b>Location of Tweets</b></h1>
-                    <p style="text-align:justify; font-size:20px; padding-left: 10%"><br><br>
+                    <div class='col-sm-12' style=" padding-left: 10%; padding-right: 10%; ">
+                    <p style="text-align:justify; font-size:20px; padding-left: 10%;padding-top:0px!important;"><br><br>
                         According to the locations, tweets have been marked on the map. <br>
                         However, if Google is unable to identify their origin, they are taken as India.
-                    </p>
+
+                    </p><br>
+                    </div>
+
+                </div>
+                <br>
+                <br>
+                <div class="col-md-12">
+                    <center><div id="chart_div" style="padding-left:20%; padding-right: 20%; height:500px;"></div></center>
                 </div>
             </div>
             <div class="row" style="margin-top:100px">
-                <div class="col-md-5" style="padding-right: 10%">
+                <div class="col-md-12" style="padding-right: 10%">
                     <br>
                     <br>
                     <h1 style="text-align:center"><b>Top 10 Hashtags in DataSet</b></h1>
+                    <div class='col-sm-12' style="padding-top: 30px; padding-left: 10%; padding-right: 10%;">
                     <p style="text-align:center; font-size:20px"><br><br>
                        The top 10 Hashtags in the curated dataset have been listed here.
                     </p>
+                    </div>
                 </div>
-                <div class="col-md-7">
-                    <table class="table table-bordered table-striped" align="right" style="width:800px; height:400px; border: 2px solid black; text-align:center">
-                        <thead style="background-color:black; color:white">
+                <div class="col-md-12">
+                    <table class="table table-bordered table-striped" id="myTable" align="center" style="width:100%; height:400px; border: 2px solid black; text-align:center">
+                        <thead style="background-color:darkslategray; color:white">
                             <td width="200px"><b>Rank</b></td>
                             <td width="400px"><b>Hashtag</b></td>
-                            <td width="200px"><b>Occurrences</b></td>
+                            <td width="200px"><b>Frequency</b></td>
                         </thead>
                             {% for hash in hashtag_count %}
                             <tr>
-                                <td>#{{ hash["index"] }}</td>
+                                <td>{{ hash["index"] }}</td>
                                 <td>{{ hash["hashtag"] }}</td>
                                 <td>{{ hash["count"] }}</td>
                             </tr>
@@ -203,102 +199,129 @@ circle.xy {
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-12 col-md-7">
-                    <div id="donutchart" style="width: 900px; height: 600px;"></div>
-                </div>
-                <div class="col-md-5">
-                    <br><br><br><br><br><br><br>
+
+                <div class="col-md-12">
+                    <br><br><br>
                     <h2 style="text-align:center"><b>Original Tweets vs Retweets</b></h2>
-                    <p style="text-align:center; font-size:20px"><br><br>
+                    <div class='col-sm-12' style=" padding-left: 10%; padding-right: 10%;">
+                    <p  style="padding-top: 0px !important; padding-left: 10%; padding-right: 10%;"><br><br>
                         This donut chart imparts information about the population of Original Tweets vs the population of Retweets in the curated dataset.
                     </p>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-12">
+                    <center><div id="donutchart" style=" height: 600px;"></div></center>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12 col-xs-12 col-sm-12">
                     <h2 style="text-align:center"><b>Favorite Count in Original Tweets</b></h2>
-                <div id="columnchart_values" style="width: 900px; height: 500px;"></div>
+                    <div class="col-sm-12" style="padding-top: 30px; padding-left: 10%; padding-right: 10%;">
+                        <p>The following graph shows the distribution of favorite counts in original tweets. The ranges have
+                        been split into parts with their lower limits written on the x-axis of the graph. </p>
+                    </div>
+                <center><div id="columnchart_values" class="col-sm-12" style=" height: 500px;"></div></center>
+
+
                 </div>
-                <div class="col-md-6">
+
+            </div>
+
+            <div class="row">
+                 <div class="col-md-12">
                     <h2 style="text-align:center"><b>Distribution of Tweets (Text vs Image)</b></h2>
-                    <div id="barchart_values" style="width: 900px; height: 500px;"></div>
+                     <div class="col-sm-12" style="padding-top: 30px; padding-left: 10%; padding-right: 10%;;">
+                        <p>The following graph shows the distribution of tweets as per their content.
+                        The three categories are Only Text, Text + Image, and only Image. The x-axis is gives a
+                        measure of frequency of such tweets exhibited in the dataset.</p>
+                    </div>
+                    <center><div id="barchart_values" class="col-sm-12" style=" height: 500px;"></div></center>
                 </div>
             </div>
+
         </div>
 
-    <script>
-  var linkScale = d3.scale.linear().domain([0,.9,.95,1]).range([0,10,100,1000]);
-
-  sampleNodes = d3.range(3000).map(function(d) {
-    var datapoint = {};
-    datapoint.id = "Sample Node " + d;
-    //console.log(datapoint);
-    return datapoint;
-  })
-  k={};
-  {% for x in nodes %}
-      [console.log(x)],
-  {% endfor %}
-
-  console.log(k);
-
-
-
-  sampleLinks = [];
-    var y = 0;
-    while (y < 1000) {
-      var randomSource = Math.floor(Math.random() * 1000);
-      var randomTarget = Math.floor(linkScale(Math.random()));
-      var linkObject = {source: sampleNodes[randomSource], target: sampleNodes[randomTarget]}
-      if (randomSource != randomTarget) {
-       sampleLinks.push(linkObject);
-      }
-      y++;
-  }
-
-      force = d3.layout.force()
-      .size([500,500])
-      .gravity(.5)
-      .nodes(sampleNodes)
-      .links(sampleLinks)
-      .on("tick", forceTick);
-
-      d3.select("svg").selectAll("circle.node")
-      .data(sampleNodes)
-      .enter()
-      .append("circle")
-      .attr("r", 3)
-      .style("fill", "red")
-      .attr("class", "node")
-      .style("stroke", "white")
-      .style("stroke-width", "1px");
-
-      force.start();
-
-      function forceTick() {
-      	var context = d3.select("canvas").node().getContext("2d");
-        context.clearRect(0,0,500,500);
-
-        context.lineWidth = 1;
-        context.strokeStyle = "rgba(0, 0, 0, 0.5)";
-
-      sampleLinks.forEach(function (link) {
-        context.beginPath();
-        context.moveTo(link.source.x,link.source.y)
-        context.lineTo(link.target.x,link.target.y)
-        context.stroke();
-      })
-
-        d3.selectAll("circle.node")
-        .attr("cx", function(d) {return d.x})
-        .attr("cy", function(d) {return d.y});
-      }
-
-
-</script>
 
 <footer style="height: 40px; color: #fff; background-color: darkslategray;"><center>
     <p style="padding-top: 10px;">Made by <a href="https://mittrayash.github.io/"><b>&nbsp;Yash Mittra</b></a></p>
 </center></footer>
+
+<script>
+/* global d3 */
+
+var canvas = d3.select("#network"),
+  width = canvas.attr("width"),
+  height = canvas.attr("height"),
+  ctx = canvas.node().getContext("2d"),
+  r = 3,
+  color = d3.scaleOrdinal(d3.schemeCategory20),
+  simulation = d3.forceSimulation()
+    .force("x", d3.forceX(width/2))
+    .force("y", d3.forceY(height/2))
+    .force("collide", d3.forceCollide(r+1))
+    .force("charge", d3.forceManyBody()
+      .strength(-20))
+    .force("link", d3.forceLink()
+      .id(function (d) { return d.name; }));
+d3.json('data.json' , function (err, graph) {
+  if (err) throw err;
+  simulation.nodes(graph.nodes);
+  simulation.force("link")
+    .links(graph.links);
+  simulation.on("tick", update);
+  canvas
+      .call(d3.drag()
+          .container(canvas.node())
+          .subject(dragsubject)
+          .on("start", dragstarted)
+          .on("drag", dragged)
+          .on("end", dragended));
+  function update() {
+    ctx.clearRect(0, 0, width, height);
+    ctx.beginPath();
+    ctx.globalAlpha = 0.1;
+    ctx.strokeStyle = "#aaa";
+    graph.links.forEach(drawLink);
+    ctx.stroke();
+    ctx.globalAlpha = 1.0;
+    graph.nodes.forEach(drawNode);
+  }
+  function dragsubject() {
+    return simulation.find(d3.event.x, d3.event.y);
+  }
+});
+function dragstarted() {
+  if (!d3.event.active) simulation.alphaTarget(0.3).restart();
+  d3.event.subject.fx = d3.event.subject.x;
+  d3.event.subject.fy = d3.event.subject.y;
+  //console.log(d3.event.subject);
+}
+function dragged() {
+  d3.event.subject.fx = d3.event.x;
+  d3.event.subject.fy = d3.event.y;
+}
+function dragended() {
+  if (!d3.event.active) simulation.alphaTarget(0);
+  d3.event.subject.fx = null;
+  d3.event.subject.fy = null;
+}
+function drawNode(d) {
+  ctx.beginPath();
+  ctx.fillStyle = color(d.party);
+  ctx.moveTo(d.x, d.y);
+  ctx.arc(d.x, d.y, r, 0, Math.PI*2);
+  ctx.fill();
+}
+function drawLink(l) {
+  ctx.moveTo(l.source.x, l.source.y);
+  ctx.lineTo(l.target.x, l.target.y);
+}
+
+</script>
+    <script type="text/javascript">
+            $(document).ready(function(){
+            $('#myTable').DataTable();
+            });
+        </script>
     </body>
 </html>
